@@ -1,0 +1,35 @@
+name: ci
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate theme JSON
+        run: |
+          node -e '
+            const fs = require("fs");
+            const pkg = JSON.parse(fs.readFileSync("package.json", "utf8"));
+            for (const t of pkg.contributes.themes) {
+              const theme = JSON.parse(fs.readFileSync(t.path, "utf8"));
+              const bad = Object.entries(theme.colors || {})
+                .filter(([, v]) => !/^#([0-9a-f]{3,4}|[0-9a-f]{6}|[0-9a-f]{8})$/i.test(v));
+              if (bad.length) { console.error("Invalid colors:", bad); process.exit(1); }
+              console.log(`${t.label}: ${Object.keys(theme.colors).length} colors, ${theme.tokenColors.length} token rules OK`);
+            }'
+
+      - name: Package extension
+        run: npx --yes @vscode/vsce@4.1.0 package --out hell-pine.vsix
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hell-pine-vsix
+          path: hell-pine.vsix

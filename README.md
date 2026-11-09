@@ -1,6 +1,8 @@
 
 # 🌑 Hell Pine — A Darker Twist on Rosé Pine
 
+[![ci](https://github.com/abxengg/hell-pine/actions/workflows/ci.yml/badge.svg)](https://github.com/abxengg/hell-pine/actions/workflows/ci.yml)
+
 > _“Born in the fire of tmux, refined for the calm of code.”_
 
 **Hell Pine** is a bold, terminal-inspired dark theme for Visual Studio Code — a meticulously crafted evolution of [Rosé Pine](https://rosepinetheme.com/), born from the nuanced visual shifts experienced within **tmux** sessions. What began as a subtle observation became a deliberate design — optimized for developers who live in the terminal and demand both beauty and clarity in their workflow.
