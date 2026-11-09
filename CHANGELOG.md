@@ -2,7 +2,7 @@
 
 All notable changes to Hell Pine are documented here.
 
-## [0.0.4] - 2026-11-09
+## [0.0.5] - 2026-11-09
 
 ### Added
 - Semantic highlighting support (`semanticTokenColors`) so language servers (TypeScript, Rust, Java, …) match the TextMate colors.
