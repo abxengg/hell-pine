@@ -79,6 +79,18 @@ Then open the Command Palette → **Preferences: Color Theme** → **Hell Pine**
 
 To hack on the theme, open the folder in VS Code and press <kbd>F5</kbd> — an Extension Development Host window opens with your changes applied live.
 
+## 🔧 Development & Releases
+
+- **CI** ([`ci.yml`](.github/workflows/ci.yml)): every push to `master` and every pull request validates the theme colors and builds the `.vsix`, which is attached to the run as an artifact.
+- **Release** ([`release.yml`](.github/workflows/release.yml)): pushing a version tag publishes the extension.
+
+To release a new version:
+
+1. Bump `version` in `package.json` and add a section to [`CHANGELOG.md`](CHANGELOG.md).
+2. Commit, then tag and push: `git tag vX.Y.Z && git push origin master vX.Y.Z`.
+
+The release workflow checks that the tag matches `package.json`, creates the GitHub release with the `.vsix` and the changelog notes, and publishes to the VS Code Marketplace using the `VSCE_PAT` repository secret.
+
 ### 🙏 Acknowledgements
 
 Huge appreciation to the creators of [Rosé Pine](https://rosepinetheme.com/) for the inspiration and aesthetic foundation.
