@@ -64,6 +64,17 @@ ext install ABX.hell-pine
 Or visit the Marketplace page here:
 📎 https://marketplace.visualstudio.com/items?itemName=ABX.hell-pine
 
+### 🧩 VSCodium (and other editors without the Microsoft Marketplace)
+
+Install the latest release straight from GitHub:
+
+```bash
+curl -fsSL -o /tmp/hell-pine.vsix https://github.com/abxengg/hell-pine/releases/latest/download/hell-pine.vsix
+codium --install-extension /tmp/hell-pine.vsix
+```
+
+Or download [`hell-pine.vsix`](https://github.com/abxengg/hell-pine/releases/latest/download/hell-pine.vsix), then in the Extensions view choose **⋯ → Install from VSIX…**. Run the same steps again to update.
+
 ### 🛠️ Manual Installation
 
 Build and install the `.vsix` yourself:

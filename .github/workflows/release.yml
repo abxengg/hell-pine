@@ -33,10 +33,12 @@ jobs:
           version=${GITHUB_REF_NAME#v}
           awk -v v="$version" '$0 ~ "^## \\[" v "\\]" {f=1; next} /^## /{f=0} f' CHANGELOG.md > notes.md
           [ -s notes.md ] || echo "Release $GITHUB_REF_NAME" > notes.md
+          # A copy without the version gives a stable link: releases/latest/download/hell-pine.vsix
+          cp "hell-pine-$version.vsix" hell-pine.vsix
           if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" hell-pine-*.vsix --clobber
+            gh release upload "$GITHUB_REF_NAME" "hell-pine-$version.vsix" hell-pine.vsix --clobber
           else
-            gh release create "$GITHUB_REF_NAME" hell-pine-*.vsix --title "Hell Pine $GITHUB_REF_NAME" --notes-file notes.md
+            gh release create "$GITHUB_REF_NAME" "hell-pine-$version.vsix" hell-pine.vsix --title "Hell Pine $GITHUB_REF_NAME" --notes-file notes.md
           fi
 
       - name: Publish to VS Code Marketplace
@@ -47,4 +49,4 @@ jobs:
             echo "::warning::VSCE_PAT secret is not set; skipping Marketplace publish"
             exit 0
           fi
-          npx --yes @vscode/vsce@4.1.0 publish --packagePath hell-pine-*.vsix
+          npx --yes @vscode/vsce@4.1.0 publish --packagePath "hell-pine-${GITHUB_REF_NAME#v}.vsix"
