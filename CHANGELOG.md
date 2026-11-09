@@ -2,6 +2,15 @@
 
 All notable changes to Hell Pine are documented here.
 
+## [0.1.0] - 2026-11-09
+
+### Changed
+- The project now lives in the [abxengg](https://github.com/abxengg) organization; repository, issue and homepage links updated.
+
+### Added
+- CI: every push checks the theme file and builds the extension package.
+- Release automation: pushing a version tag publishes to the VS Code Marketplace and creates a GitHub release with the `.vsix` attached.
+
 ## [0.0.5] - 2026-11-09
 
 ### Added

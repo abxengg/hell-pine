@@ -3,7 +3,7 @@
     "displayName": "Hell Pine",
     "description": "A darker, higher-contrast take on Rosé Pine, born inside tmux.",
     "publisher": "ABX",
-    "version": "0.0.5",
+    "version": "0.1.0",
     "license": "MIT",
     "icon": "assets/icon/hell-pine.png",
     "repository": {
