@@ -8,12 +8,12 @@
     "icon": "assets/icon/hell-pine.png",
     "repository": {
         "type": "git",
-        "url": "https://github.com/AbiXnash/hell-pine.git"
+        "url": "https://github.com/abx-engg/hell-pine.git"
     },
     "bugs": {
-        "url": "https://github.com/AbiXnash/hell-pine/issues"
+        "url": "https://github.com/abx-engg/hell-pine/issues"
     },
-    "homepage": "https://github.com/AbiXnash/hell-pine#readme",
+    "homepage": "https://github.com/abx-engg/hell-pine#readme",
     "engines": {
         "vscode": "^1.70.0"
     },

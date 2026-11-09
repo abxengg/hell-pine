@@ -67,7 +67,7 @@ Or visit the Marketplace page here:
 Build and install the `.vsix` yourself:
 
 ```bash
-git clone https://github.com/AbiXnash/hell-pine.git
+git clone https://github.com/abx-engg/hell-pine.git
 cd hell-pine
 npx @vscode/vsce package
 code --install-extension hell-pine-*.vsix
