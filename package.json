@@ -1,27 +1,38 @@
 {
-    "icon": "./assets/icon/hell-pine.png",
     "name": "hell-pine",
-    "displayName": "hell pine",
-    "description": "HELL PINE!!! A modified version of rose-pine",
+    "displayName": "Hell Pine",
+    "description": "A darker, higher-contrast take on Rosé Pine, born inside tmux.",
     "publisher": "ABX",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "license": "MIT",
-    "repository": "https://github.com/AbiXnash/hell-pine.git",
+    "icon": "assets/icon/hell-pine.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/AbiXnash/hell-pine.git"
+    },
+    "bugs": {
+        "url": "https://github.com/AbiXnash/hell-pine/issues"
+    },
+    "homepage": "https://github.com/AbiXnash/hell-pine#readme",
     "engines": {
-        "vscode": "^1.99.0"
+        "vscode": "^1.70.0"
     },
     "categories": [
         "Themes"
     ],
     "keywords": [
-        "minimal",
-        "aesthetic",
-        "pastel",
-        "classy",
-        "soft"
+        "theme",
+        "color-theme",
+        "dark",
+        "dark theme",
+        "rose pine",
+        "rosé pine",
+        "tmux",
+        "terminal",
+        "high contrast"
     ],
     "galleryBanner": {
-        "color": "#191724",
+        "color": "#16181d",
         "theme": "dark"
     },
     "contributes": {

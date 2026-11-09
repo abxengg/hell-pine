@@ -35,7 +35,6 @@ To enhance the look and feel of your editor or code previews, it's **recommended
 {
     "editor.fontWeight": "600"
 }
-
 ```
 ---
 
@@ -45,10 +44,8 @@ To enhance the look and feel of your editor or code previews, it's **recommended
 - 🖤 **Dark elegance** with enhanced contrast and visual edge  
 - 🧠 **Focus-driven** colors for reduced eye fatigue  
 - ⚡️ **Optimized** for terminal emulators and Tmux workflows  
-- 🧩 Full language support, including:
-  - HTML, CSS, JavaScript, TypeScript  
-  - Java, Python, Go, C++  
-  - Markdown, YAML, JSON, and more  
+- 🧩 **Semantic highlighting** — colors stay consistent when language servers (TypeScript, Rust, Java, Go, …) take over
+- 📝 Tuned for code, JSON/YAML, CSS/HTML and Markdown
 
 ---
 
@@ -61,17 +58,24 @@ Simply search for `Hell Pine` in the Extensions tab or install directly via comm
 ```bash
 ext install ABX.hell-pine
 ```
+
 Or visit the Marketplace page here:
 📎 https://marketplace.visualstudio.com/items?itemName=ABX.hell-pine
-### 🛠️ Manual Installation (Development)
 
-Until automatic updates roll out, you can also clone the repository manually:
-``` bash
+### 🛠️ Manual Installation
+
+Build and install the `.vsix` yourself:
+
+```bash
 git clone https://github.com/AbiXnash/hell-pine.git
 cd hell-pine
-code .
+npx @vscode/vsce package
+code --install-extension hell-pine-*.vsix
 ```
-Open the folder in VS Code and select the Hell Pine theme from the Command Palette or settings.
+
+Then open the Command Palette → **Preferences: Color Theme** → **Hell Pine**.
+
+To hack on the theme, open the folder in VS Code and press <kbd>F5</kbd> — an Extension Development Host window opens with your changes applied live.
 
 ### 🙏 Acknowledgements
 

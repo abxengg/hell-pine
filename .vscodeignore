@@ -1,0 +1,8 @@
+.git/**
+.github/**
+.gitignore
+.gitattributes
+assets/preview/**
+**/*.vsix
+node_modules/**
+.env
