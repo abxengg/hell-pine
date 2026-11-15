@@ -51,6 +51,13 @@ To enhance the look and feel of your editor or code previews, it's **recommended
 
 ---
 
+## 🌒 Also for Neovim and your terminal
+
+[**hell-pine.nvim**](https://github.com/abxengg/hell-pine.nvim) brings the same colours to Neovim, with matching
+themes for Ghostty, WezTerm, kitty, Alacritty, tmux, Starship, btop, fish, Zed and fzf.
+
+---
+
 ## 🚀 Installation
 
 ### 🔌 From the VS Code Marketplace
