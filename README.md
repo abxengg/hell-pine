@@ -3,6 +3,8 @@
 
 [![ci](https://github.com/abxengg/hell-pine/actions/workflows/ci.yml/badge.svg)](https://github.com/abxengg/hell-pine/actions/workflows/ci.yml)
 
+![Hell Pine: Rosé Pine went through hell. It came back beautiful.](./assets/ad/hell-pine-ad-wide.png)
+
 > _“Born in the fire of tmux, refined for the calm of code.”_
 
 **Hell Pine** is a bold, terminal-inspired dark theme for Visual Studio Code — a meticulously crafted evolution of [Rosé Pine](https://rosepinetheme.com/), born from the nuanced visual shifts experienced within **tmux** sessions. What began as a subtle observation became a deliberate design — optimized for developers who live in the terminal and demand both beauty and clarity in their workflow.
@@ -96,6 +98,19 @@ code --install-extension hell-pine-*.vsix
 Then open the Command Palette → **Preferences: Color Theme** → **Hell Pine**.
 
 To hack on the theme, open the folder in VS Code and press <kbd>F5</kbd> — an Extension Development Host window opens with your changes applied live.
+
+## 📣 Share Hell Pine
+
+Ready-made images for posts and stories, in [`assets/ad/`](./assets/ad):
+
+| Square · 1080×1080 | Wide · 1200×630 | Story · 1080×1920 |
+|---|---|---|
+| [hell-pine-ad-square.png](./assets/ad/hell-pine-ad-square.png) | [hell-pine-ad-wide.png](./assets/ad/hell-pine-ad-wide.png) | [hell-pine-ad-story.png](./assets/ad/hell-pine-ad-story.png) |
+
+They are rendered from [`assets/ad/ad.html`](./assets/ad/ad.html) with `node assets/ad/render.mjs` (needs Chrome and the
+`hell-pine.nvim` repository next to this one, for the screenshot).
+
+---
 
 ## 🔧 Development & Releases
 
