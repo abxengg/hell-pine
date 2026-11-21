@@ -1,0 +1,143 @@
+<!doctype html>
+<!--
+  Hell Pine promo ad. One design, two layouts:
+    ad.html#square  → 1080×1080 (Instagram / LinkedIn feed)
+    ad.html#wide    → 1200×630  (X / Twitter, link previews)
+    ad.html#story   → 1080×1920 (Instagram / WhatsApp stories; content kept inside the 250px top/bottom safe zones)
+  Render both:  node assets/ad/render.mjs
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,800;1,400&family=Inter:wght@400;500;600&display=block" rel="stylesheet" />
+<style>
+  :root {
+    /* Hell Pine palette (hell-pine.nvim/lua/hell-pine/palette.lua) */
+    --base: #16181d; --surface: #1e2026; --overlay: #2c2e34;
+    --muted: #6e6a86; --subtle: #908caa; --text: #e0def4;
+    --love: #d16d92; --gold: #ca9f7c; --rose: #ebbcba; --pine: #658789; --foam: #9ccfd8; --iris: #c4a7e7;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+    --sans: "Inter", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--mono); color: var(--text); background: #0f1014; -webkit-font-smoothing: antialiased; overflow: hidden; }
+  .ad { position: relative; overflow: hidden; background:
+      radial-gradient(70% 45% at 50% 108%, rgba(209,109,146,.38), rgba(202,159,124,.12) 45%, transparent 75%),
+      radial-gradient(50% 40% at 100% 0%, rgba(196,167,231,.12), transparent 70%),
+      linear-gradient(180deg, #121318 0%, var(--base) 100%); }
+  /* faint scanline texture: terminal grit */
+  .ad::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 1px, transparent 1px 3px); }
+
+  .kicker { font-size: 15px; letter-spacing: .14em; text-transform: uppercase; color: var(--subtle); display: flex; align-items: center; gap: 12px; }
+  .kicker .flame { color: var(--love); }
+  .brand { font-weight: 800; letter-spacing: -.04em; line-height: 1; }
+  .brand b { color: var(--love); font-weight: 800; }
+  h1 { font-weight: 800; letter-spacing: -.045em; line-height: 1.02; }
+  h1 em { font-style: italic; font-weight: 400; background: linear-gradient(90deg, var(--rose), var(--love) 55%, var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent; padding-right: .08em; }
+  .sub { font-family: var(--sans); color: var(--subtle); line-height: 1.45; }
+  .sub b { color: var(--text); font-weight: 600; }
+
+  .shot { position: absolute; overflow: hidden; border-radius: 11px;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 40px 90px rgba(0,0,0,.6), 0 0 120px rgba(209,109,146,.18); }
+  /* --w = rendered width of the editor window; image is scaled so the window fills it exactly */
+  .shot img { position: absolute; width: calc(var(--w) * 3400 / 3213); max-width: none;
+    left: calc(var(--w) * -93 / 3213); top: calc(var(--w) * -90 / 3213); }
+  .shot::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 70px; background: linear-gradient(transparent, rgba(22,24,29,.95)); }
+
+  .palette { display: flex; gap: 6px; }
+  .palette span { flex: 1; height: 100%; border-radius: 6px; position: relative; }
+
+  .ports { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ports span { font-size: 14px; padding: 6px 11px; border-radius: 7px; background: rgba(30,32,38,.85); border: 1px solid var(--overlay); color: var(--text); }
+  .ports span::before { content: "●"; font-size: 9px; margin-right: 7px; vertical-align: 2px; }
+  .ports span:nth-child(6n+1)::before { color: var(--love); } .ports span:nth-child(6n+2)::before { color: var(--gold); }
+  .ports span:nth-child(6n+3)::before { color: var(--rose); } .ports span:nth-child(6n+4)::before { color: var(--pine); }
+  .ports span:nth-child(6n+5)::before { color: var(--foam); } .ports span:nth-child(6n+6)::before { color: var(--iris); }
+
+  .cta { display: inline-flex; align-items: center; gap: 12px; border-radius: 10px; background: var(--surface); border: 1px solid #3a3c44; padding: 12px 16px; font-size: 18px; }
+  .cta .p { color: var(--foam); }
+  .cta .c { color: var(--text); }
+  .cta .c i { font-style: normal; color: var(--iris); }
+  .cur { display: inline-block; width: 10px; height: 20px; background: var(--rose); vertical-align: -3px; }
+  .link { font-size: 15px; color: var(--muted); }
+  .link b { color: var(--rose); font-weight: 600; }
+
+  /* ---------------- square 1080×1080 ---------------- */
+  .square .ad { width: 1080px; height: 1080px; }
+  .square .top { position: absolute; left: 72px; right: 72px; top: 64px; }
+  .square .row { display: flex; justify-content: space-between; align-items: center; }
+  .square .brand { font-size: 30px; }
+  .square h1 { font-size: 64px; margin-top: 38px; }
+  .square .sub { font-size: 21px; margin-top: 18px; max-width: 760px; }
+  .square .shot { left: 72px; width: 936px; --w: 936px; top: 442px; height: 368px; }
+  .square .palette { position: absolute; left: 72px; right: 72px; top: 834px; height: 16px; }
+  .square .ports { position: absolute; left: 72px; right: 72px; top: 878px; }
+  .square .bottom { position: absolute; left: 72px; right: 72px; bottom: 54px; display: flex; justify-content: space-between; align-items: center; }
+
+  /* ---------------- wide 1200×630 ---------------- */
+  .wide .ad { width: 1200px; height: 630px; }
+  .wide .top { position: absolute; left: 60px; top: 52px; width: 560px; }
+  .wide .row { display: flex; gap: 18px; align-items: center; }
+  .wide .brand { font-size: 26px; }
+  .wide .kicker { font-size: 12.5px; }
+  .wide h1 { font-size: 50px; margin-top: 30px; }
+  .wide .sub { font-size: 18px; margin-top: 16px; }
+  .wide .ports { position: absolute; left: 60px; width: 560px; top: 392px; gap: 7px; }
+  .wide .ports span { font-size: 13px; padding: 5px 9px; }
+  .wide .bottom { position: absolute; left: 60px; bottom: 44px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .wide .cta { font-size: 16px; padding: 10px 14px; }
+  .wide .shot { left: 660px; top: 70px; width: 600px; --w: 900px; height: 470px; border-radius: 11px 0 0 11px; }
+  .wide .palette { position: absolute; left: 660px; right: 0; top: 562px; height: 12px; }
+
+  /* ---------------- story 1080×1920 ---------------- */
+  .story .ad { width: 1080px; height: 1920px; display: flex; flex-direction: column; padding: 250px 72px 250px; }
+  .story .ad { background:
+      radial-gradient(90% 35% at 50% 104%, rgba(209,109,146,.42), rgba(202,159,124,.14) 45%, transparent 75%),
+      radial-gradient(70% 30% at 100% 0%, rgba(196,167,231,.14), transparent 70%),
+      linear-gradient(180deg, #121318 0%, var(--base) 100%); }
+  .story .row { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .story .brand { font-size: 40px; }
+  .story .kicker { font-size: 17px; }
+  .story h1 { font-size: 80px; margin-top: 42px; }
+  .story .sub { font-size: 25px; margin-top: 26px; }
+  .story .shot { position: relative; width: 1008px; --w: 1450px; height: 540px; margin-top: 44px; flex: none; border-radius: 11px 0 0 11px; }
+  .story .palette { height: 18px; margin-top: 22px; }
+  .story .ports { margin-top: 28px; gap: 10px; }
+  .story .ports span { font-size: 18px; padding: 8px 14px; }
+  .story .bottom { margin-top: auto; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+  .story .cta { font-size: 24px; padding: 16px 22px; }
+  .story .cur { height: 26px; width: 13px; }
+  .story .link { font-size: 21px; }
+</style>
+</head>
+<body>
+  <div class="ad">
+    <div class="top">
+      <div class="row">
+        <div class="brand">hell<b>·</b>pine</div>
+        <div class="kicker"><span class="flame">🔥</span>A darker Rosé Pine · born in tmux</div>
+      </div>
+      <h1>Rosé Pine went<br />through hell.<br /><em>It came back beautiful.</em></h1>
+      <p class="sub">Deeper shadows, punchier highlights and sharper contrast — tuned for <b>long sessions in split panes</b>. Free and open source.</p>
+    </div>
+
+    <div class="shot"><img src="../../../hell-pine.nvim/assets/hero.png" alt="Neovim and a terminal in the Hell Pine theme" /></div>
+
+    <div class="palette" aria-label="Hell Pine palette">
+      <span style="background:#16181d;box-shadow:inset 0 0 0 1px #3a3c44"></span><span style="background:#1e2026;box-shadow:inset 0 0 0 1px #3a3c44"></span><span style="background:#2c2e34"></span><span style="background:#6e6a86"></span><span style="background:#908caa"></span><span style="background:#e0def4"></span><span style="background:#d16d92"></span><span style="background:#ca9f7c"></span><span style="background:#ebbcba"></span><span style="background:#658789"></span><span style="background:#9ccfd8"></span><span style="background:#c4a7e7"></span>
+    </div>
+
+    <div class="ports">
+      <span>VS Code</span><span>Neovim</span><span>Zed</span><span>Ghostty</span><span>kitty</span><span>WezTerm</span><span>Alacritty</span><span>tmux</span><span>fish</span><span>Starship</span><span>fzf</span><span>btop</span>
+    </div>
+
+    <div class="bottom">
+      <div class="cta"><span class="p">❯</span><span class="c">ext install <i>ABX.hell-pine</i></span><span class="cur"></span></div>
+      <div class="link">github.com/<b>abxengg/hell-pine</b></div>
+    </div>
+  </div>
+  <script>document.body.className = (location.hash || "#square").slice(1);</script>
+</body>
+</html>
